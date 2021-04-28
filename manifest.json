@@ -11,7 +11,8 @@
     },
     "options_page": "./options.html",
     "browser_action": {
-        "default_popup": "popup.html"
+        "default_popup": "popup.html",
+        "default_title": "Rich Diff"
     },
     "permissions": ["tabs", "https://github.com/*"]
 }
