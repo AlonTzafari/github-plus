@@ -9,3 +9,11 @@ chrome.tabs.onUpdated.addListener( (tabId, changeInfo) => {
         })
     }
 });
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.type === "getEnabled") {
+        sendResponse({enabled: ENABLED})
+    } else if (request.type === "setEnabled") {
+        ENABLED = request.enabled;
+    }
+})
