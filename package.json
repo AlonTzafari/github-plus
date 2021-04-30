@@ -1,31 +1,30 @@
 {
-  "name": "chrome-extension-webpack",
-  "version": "0.0.1",
-  "description": "A boilerplate to chrome extension with webpack",
+  "name": "chrome-extension-react-typescript-boilerplate",
+  "version": "1.1.0",
+  "description": "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
   "scripts": {
-    "build": "node utils/build.js",
-    "start": "node utils/webserver.js"
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --config webpack.dev.js",
+    "watch": "webpack -w --config webpack.dev.js"
+  },
+  "author": "Joe Martella",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "^0.0.60",
+    "@types/react": "^16.9.32",
+    "@types/react-dom": "^16.9.6",
+    "css-loader": "^3.4.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "ts-loader": "^4.0.1",
+    "typescript": "^3.8.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "react": "16.12.0",
-    "react-dom": "16.12.0"
-  },
-  "devDependencies": {
-    "@babel/core": "7.7.4",
-    "@babel/preset-react": "7.7.4",
-    "babel-loader": "8.0.6",
-    "react-hot-loader": "4.12.18",
-    "clean-webpack-plugin": "3.0.0",
-    "copy-webpack-plugin": "5.0.5",
-    "css-loader": "3.2.0",
-    "file-loader": "4.3.0",
-    "fs-extra": "8.1.0",
-    "html-loader": "0.5.5",
-    "html-webpack-plugin": "3.2.0",
-    "style-loader": "1.0.0",
-    "webpack": "4.41.2",
-    "webpack-dev-server": "3.9.0",
-    "write-file-webpack-plugin": "4.5.1",
-    "webpack-cli": "3.3.10"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
