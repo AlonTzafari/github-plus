@@ -21,9 +21,10 @@
             "js": ["./js/content.js"]
         },
         {
-            "matches": ["https://render.githubusercontent.com/*"],
+            "matches": ["https://*.github.com/*", "https://render.githubusercontent.com/*"],
             "all_frames": true,
-            "js": ["./js/iframeScript.js"]
+            "js": ["./js/iframeScript.js"],
+            "css": ["./diff.css"]
         }
     ],
     "icons": {
@@ -32,5 +33,5 @@
         "128": "icon128.png"
     },
 
-    "permissions": ["storage", "tabs", "https://github.com/*", "https://render.githubusercontent.com/*"]
+    "permissions": ["storage", "tabs", "https://github.com/*", "https://render.githubusercontent.com/*", "https://raw.githubusercontent.com/*"]
 }

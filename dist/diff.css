@@ -1,0 +1,6 @@
+.difference {
+    position: absolute;
+    z-index: 9999;  
+    top: 0;
+    width: 414px;
+}
