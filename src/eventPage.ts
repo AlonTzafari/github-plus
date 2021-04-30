@@ -15,11 +15,17 @@ loadOptions();
 
 // Listen to messages sent from other parts of the extension.
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.popupMounted) {
-        console.log('eventPage notified that Popup.tsx has mounted.');
-    }
-
+    
     if (request.loadOptions) loadOptions();    
+
 });
 
-0
+chrome.tabs.onUpdated.addListener( (tabId, changeInfo) => {
+    if (changeInfo.status === 'complete' && ENABLED) {
+        chrome.tabs.get(tabId, tab_info => {
+            if ( /^https:\/\/github/.test(tab_info.url) ) {
+                chrome.tabs.executeScript(null, {file: "./foreground.js"}, () => console.log("script activated"));
+            }
+        })
+    }
+});
