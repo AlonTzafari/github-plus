@@ -15,12 +15,22 @@
         "scripts": ["js/eventPage.js"],
         "persistent": true
     },
-
+    "content_scripts" : [
+        {
+            "matches": ["https://*.github.com/*"],
+            "js": ["./js/content.js"]
+        },
+        {
+            "matches": ["https://render.githubusercontent.com/*"],
+            "all_frames": true,
+            "js": ["./js/iframeScript.js"]
+        }
+    ],
     "icons": {
         "16": "icon16.png",
         "48": "icon48.png",
         "128": "icon128.png"
     },
 
-    "permissions": ["storage", "tabs", "https://github.com/*"]
+    "permissions": ["storage", "tabs", "https://github.com/*", "https://render.githubusercontent.com/*"]
 }
