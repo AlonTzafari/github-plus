@@ -1,0 +1,38 @@
+$button: white;
+$active: #2196F3;
+$inactive: #ccc;
+$switchWidth: 50px;
+$switchHeight: 15px;
+
+.switch {
+    position: relative;
+    width: $switchWidth;
+    height: $switchHeight;
+    border-radius: $switchHeight * 0.5;
+    transition-duration: 0.4s;
+    background-color: $inactive;
+   
+  
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        background-color: $button;
+        height: $switchHeight * 1.5;
+        width: $switchHeight * 1.5;
+        border-radius: 50%;
+        left: 0;
+        top: - $switchHeight * 0.25;
+        margin: 0;
+        transition-duration: 0.4s;
+    }
+
+    &.active {
+        background-color: $active;
+
+        .slider {
+            left: $switchWidth - $switchHeight * 1.5;
+        }
+    }
+
+}
