@@ -1,6 +1,17 @@
-.difference {
+.diff-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    z-index: 9999;  
+    width: 100%;
+    height: 100%;
+    margin: 0;
     top: 0;
+    left: 0;
+    background-color: rgb(41, 38, 38);
+}
+
+
+.difference {
     width: 414px;
 }
