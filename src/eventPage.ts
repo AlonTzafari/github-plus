@@ -20,11 +20,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 });
 
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    console.log('tabId: ', tabId);
+    console.log('changeInfo: ', changeInfo);
+    console.log('tab: ', tab);
+    
+})
+
 chrome.tabs.onUpdated.addListener( (tabId, changeInfo) => {
     if (changeInfo.status === 'complete' && ENABLED) {
         chrome.tabs.get(tabId, tab_info => {
             if ( /^https:\/\/github/.test(tab_info.url) ) {
-                chrome.tabs.executeScript(null, {file: "./foreground.js"}, () => console.log("script activated"));
+                chrome.tabs.executeScript(tab_info.id, {file: './js/content.js'}, () => console.log(chrome.runtime.lastError, "script activated"));
             }
         })
     }
