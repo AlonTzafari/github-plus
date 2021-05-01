@@ -1,7 +1,7 @@
 # Github Web Extra features
-> A chrome extension aims to give developers more tools when reviewing pull requests. 
+> A chrome extension aimed to give developers more tools when reviewing pull requests. 
 
-> Built using using TypeScript and React chrome extension [boilerplate](https://github.com/jhen0409/react-chrome-extension-boilerplate).
+> Built using TypeScript and React chrome extension [boilerplate](https://github.com/jhen0409/react-chrome-extension-boilerplate).
 
 ## Installation
 1. Clone this repo
