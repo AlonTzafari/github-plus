@@ -37,6 +37,13 @@ import resemblejs from 'resemblejs';
             const newImgElem : HTMLImageElement = viewContainer.querySelector('img.added');
             const prevImgSrc = prevImgElem.src;
             const newImgSrc = newImgElem.src;
+            resemblejs.outputSettings({
+                errorColor: {
+                    red: 200,
+                    green: 0,
+                    blue: 0
+                }
+            });
             resemblejs(newImgSrc).compareTo(prevImgSrc).onComplete(data => {
                 diffImg.src = data.getImageDataUrl();
             })  
