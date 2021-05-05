@@ -2,25 +2,25 @@
 import resemblejs from 'resemblejs';
 
 (() => {
-    let counter = 0;
+    let isActionExecuted = false;
     const imgs = Array.from(document.images);
-    console.log('imgs length: ',imgs);
-    
     imgs.forEach(img => {
-        if (img.complete) ++counter;
+        if (img.complete) {
+            if ( imgs.every(img => img.src.length > 0) && !isActionExecuted) {
+                console.log('adding btn');
+                addDifferenceBtn();
+                isActionExecuted = true;
+            }
+        } 
         img.addEventListener('load', ()=> {
-            console.log(img.className, img.complete, ++counter, img.src);
-            if (counter === imgs.length) addDifferenceBtn();
+            if ( imgs.every(img => img.src.length > 0)  && !isActionExecuted) {
+                console.log('adding btn');
+                addDifferenceBtn();
+                isActionExecuted = true;
+            }
             
         }, false);
     })
-    // console.log('iframe', Array.from(document.images).map(img => `${img.className} src: ${img.src}` ));
-    
-    chrome.runtime.onMessage.addListener((message) => {
-        console.log('iframe received message');
-        
-        if(message.script === 'iframe') onImagesLoad(addDifferenceBtn);
-    });
 
     function addDifferenceBtn() : any {
         const imageViewModesList = document.querySelectorAll('ul.js-view-modes.render-view-modes');
@@ -67,33 +67,7 @@ import resemblejs from 'resemblejs';
             }
             
         });
-
-       
     }
-
-   
-    async function onImagesLoad (callback) {
-        
-        const imgs = Array.from(document.images);
-        console.log(imgs);
-        
-        let counter = 0;
-
-        imgs.forEach( img => {
-            if(img.complete)
-                incrementCounter();
-            else
-                img.addEventListener( 'load', incrementCounter);
-        } );
-
-        function incrementCounter() {
-            counter++;
-            if ( counter === imgs.length ) {
-                 callback();
-            }
-        }
-    }
-
 
 
 })()
