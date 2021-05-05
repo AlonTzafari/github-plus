@@ -21,22 +21,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.from === 'iframe') console.log(request);
 });
 
-
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    
-    if( 
-        changeInfo.status === 'complete' && /:\/\/.github.com/.test(tab.url) ) {
-        chrome.tabs.executeScript({file: './content'});
-    }
-})
-
-chrome.webNavigation.onHistoryStateUpdated.addListener(()=>{
-    chrome.runtime.sendMessage({script: 'iframe'});
-    console.log('navigation event');
-})
-
-
-// {
-//     "matches": ["https://*.github.com/*"],
-//     "js": ["./js/content.js"]
-// },
