@@ -37,14 +37,23 @@ import resemblejs from 'resemblejs';
             diffContainer.classList.add('diff-container');
             diffImg.classList.add('difference');
             diffContainer.appendChild(diffImg);
-            let isActive = false;
+            let isActive = true;
+            viewContainer.insertBefore(diffContainer, modesBar);
             differenceBtn.addEventListener('click', () => { 
                 isActive = !isActive;
                 isActive ? 
                 viewContainer.insertBefore(diffContainer, modesBar) :
                 diffContainer.remove();
             })
-            
+
+            //add event listener to other options
+            Array.from(viewModes.childNodes).forEach(li => {
+                if (li === differenceBtn) return;
+                li.addEventListener('click', () => {
+                    isActive = false;
+                    diffContainer?.remove();
+                });
+            })
 
             //get images src
             const prevImgElem : HTMLImageElement = viewContainer.querySelector('img.deleted');
