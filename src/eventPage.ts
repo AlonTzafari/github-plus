@@ -15,3 +15,15 @@ loadOptions();
 
 chrome.storage.onChanged.addListener( () => loadOptions() );
 
+const filesPageListener = (tabId, changeInfo, tab) => {
+    if ( changeInfo.url != null && /https:\/\/github\.com\/.+\/.+\/pull\/.+\/files/.test(tab.url) ) {
+        chrome.tabs.sendMessage(tabId, {command: 'openDiff'});
+    }
+}
+
+chrome.webNavigation.onCompleted.addListener(details => {
+    if ( /https:\/\/github\.com\/.+\/.+\/pull\/.+/.test(details.url) ) {
+        chrome.tabs.onUpdated.addListener(filesPageListener)
+    } 
+})
+

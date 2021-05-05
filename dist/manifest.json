@@ -34,5 +34,5 @@
         "128": "icon128.png"
     },
 
-    "permissions": ["storage", "https://github.com/*", "https://render.githubusercontent.com/*", "https://raw.githubusercontent.com/*"]
+    "permissions": ["storage", "webNavigation","tabs", "https://github.com/*", "https://render.githubusercontent.com/*", "https://raw.githubusercontent.com/*"]
 }

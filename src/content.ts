@@ -1,17 +1,38 @@
 ( () => {
-    chrome.storage.sync.get(['enabled'], ({enabled}) => {
-        if (enabled) {
-            const observer = new MutationObserver((mutations, observer) => {
-                openRichDiffView();
-                setTimeout(() => {
-                    observer.disconnect();
-                }, 2000); 
-                
-            })
-            observer.observe(document.body, {childList: true, subtree: true });
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        chrome.storage.sync.get(['enabled'], ({enabled}) => {
+            if (message.command === 'openDiff' && enabled) {
+                const observer = new MutationObserver((mutations, observer) => {
+                    const nBtns = document.querySelectorAll('button[aria-label="Display the rich diff"]').length;
+                    if (nBtns > 0) {
+                        openRichDiffView();
+                        observer.disconnect();
+                        const response = nBtns === 0 ? {err: 'no buttons'} : {numOfButtons: nBtns};
+                        sendResponse(response);
+                    }
+                    
+                })
+                observer.observe(document.body, {childList: true, subtree: true });
 
-        }
-    });
+            }
+        })
+    })
+      
+    // chrome.storage.sync.get(['enabled'], ({enabled}) => {
+    //     if (enabled) {
+    //         const observer = new MutationObserver((mutations, observer) => {
+    //             // openRichDiffView();
+    //             console.log(window.location);
+                
+    //             setTimeout(() => {
+    //                 observer.disconnect();
+    //             }, 2000);
+                
+    //         })
+    //         observer.observe(document.body, {childList: true, subtree: true });
+
+    //     }
+    // });
 
     function openRichDiffView() : void {
         
