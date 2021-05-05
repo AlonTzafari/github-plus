@@ -16,12 +16,13 @@
         "persistent": true
     },
     "content_scripts" : [
+       
         {
-            "matches": ["https://*.github.com/*"],
+            "matches": ["https://github.com/*"],
             "js": ["./js/content.js"]
         },
         {
-            "matches": ["https://*.github.com/*", "https://render.githubusercontent.com/*"],
+            "matches": ["https://render.githubusercontent.com/*"],
             "all_frames": true,
             "js": ["./js/iframeScript.js"],
             "css": ["./diff.css"]
@@ -33,5 +34,5 @@
         "128": "icon128.png"
     },
 
-    "permissions": ["storage", "tabs", "https://github.com/*", "https://render.githubusercontent.com/*", "https://raw.githubusercontent.com/*"]
+    "permissions": ["storage", "tabs", "webNavigation", "https://github.com/*", "https://render.githubusercontent.com/*", "https://raw.githubusercontent.com/*"]
 }

@@ -2,9 +2,25 @@
 import resemblejs from 'resemblejs';
 
 (() => {
-
-    onImagesLoad(addDifferenceBtn);
-
+    let counter = 0;
+    const imgs = Array.from(document.images);
+    console.log('imgs length: ',imgs);
+    
+    imgs.forEach(img => {
+        if (img.complete) ++counter;
+        img.addEventListener('load', ()=> {
+            console.log(img.className, img.complete, ++counter, img.src);
+            if (counter === imgs.length) addDifferenceBtn();
+            
+        }, false);
+    })
+    // console.log('iframe', Array.from(document.images).map(img => `${img.className} src: ${img.src}` ));
+    
+    chrome.runtime.onMessage.addListener((message) => {
+        console.log('iframe received message');
+        
+        if(message.script === 'iframe') onImagesLoad(addDifferenceBtn);
+    });
 
     function addDifferenceBtn() : any {
         const imageViewModesList = document.querySelectorAll('ul.js-view-modes.render-view-modes');
@@ -44,9 +60,11 @@ import resemblejs from 'resemblejs';
                     blue: 0
                 }
             });
-            resemblejs(newImgSrc).compareTo(prevImgSrc).onComplete(data => {
-                diffImg.src = data.getImageDataUrl();
-            })  
+            if(newImgSrc !== '' && prevImgSrc !== '') {
+                resemblejs(newImgSrc).compareTo(prevImgSrc).onComplete(data => {
+                    diffImg.src = data.getImageDataUrl();
+                })
+            }
             
         });
 
@@ -54,22 +72,24 @@ import resemblejs from 'resemblejs';
     }
 
    
-    function onImagesLoad (callback) {
-        const imgs = document.images,
-        len = imgs.length;
+    async function onImagesLoad (callback) {
+        
+        const imgs = Array.from(document.images);
+        console.log(imgs);
+        
         let counter = 0;
 
-        [].forEach.call( imgs, function( img ) {
+        imgs.forEach( img => {
             if(img.complete)
                 incrementCounter();
             else
-                img.addEventListener( 'load', incrementCounter, false );
+                img.addEventListener( 'load', incrementCounter);
         } );
 
         function incrementCounter() {
             counter++;
-            if ( counter === len ) {
-                callback();
+            if ( counter === imgs.length ) {
+                 callback();
             }
         }
     }
