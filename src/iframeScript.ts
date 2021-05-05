@@ -7,14 +7,12 @@ import resemblejs from 'resemblejs';
     imgs.forEach(img => {
         if (img.complete) {
             if ( imgs.every(img => img.src.length > 0) && !isActionExecuted) {
-                console.log('adding btn');
                 addDifferenceBtn();
                 isActionExecuted = true;
             }
         } 
         img.addEventListener('load', ()=> {
             if ( imgs.every(img => img.src.length > 0)  && !isActionExecuted) {
-                console.log('adding btn');
                 addDifferenceBtn();
                 isActionExecuted = true;
             }
