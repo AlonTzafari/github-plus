@@ -1,23 +1,29 @@
-let ENABLED : boolean;
+let AUTO_RICH_DIFF : boolean;
 
 function loadOptions () : void {
-    chrome.storage.sync.get(['enabled'], ({enabled}) => {
-        console.log('enabled: ', enabled);
-        if (typeof enabled === 'undefined') {
-            chrome.storage.sync.set({'enabled': true});
-            ENABLED = true;
+    chrome.storage.sync.get(['autoRichDiff'], ({autoRichDiff}) => {
+        console.log('autoRichDiff: ', autoRichDiff);
+        if (typeof autoRichDiff === 'undefined') {
+            chrome.storage.sync.set({'autoRichDiff': true});
+            AUTO_RICH_DIFF = true;
             return;
         } 
-        ENABLED = enabled;
+        AUTO_RICH_DIFF = autoRichDiff;
     })
 }
 loadOptions();
 
 chrome.storage.onChanged.addListener( () => loadOptions() );
 
+const tabsProcessed = [];
+
 const filesPageListener = (tabId, changeInfo, tab) => {
-    if ( changeInfo.url != null && /https:\/\/github\.com\/.+\/.+\/pull\/.+\/files/.test(tab.url) ) {
+    if ( changeInfo.url != null && /https:\/\/github\.com\/.+\/.+\/pull\/.+\/files/.test(tab.url) && tabsProcessed.indexOf(tabId) === -1) {
         chrome.tabs.sendMessage(tabId, {command: 'openDiff'});
+        tabsProcessed.push(tabId);
+    } else if ( changeInfo.url != null && !/https:\/\/github\.com\/.+\/.+\/pull\/.+\/files/.test(tab.url) && tabsProcessed.indexOf(tabId) !== -1 ) {
+        const index = tabsProcessed.indexOf(tabId);
+        tabsProcessed.splice(index, 1);
     }
 }
 
