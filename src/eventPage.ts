@@ -18,6 +18,7 @@ chrome.storage.onChanged.addListener( () => loadOptions() );
 const filesPageListener = (tabId, changeInfo, tab) => {
     if ( changeInfo.url != null && /https:\/\/github\.com\/.+\/.+\/pull\/.+\/files/.test(tab.url) ) {
         chrome.tabs.sendMessage(tabId, {command: 'openDiff'});
+        chrome.tabs.onUpdated.removeListener(filesPageListener);
     }
 }
 
