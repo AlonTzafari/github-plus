@@ -7,7 +7,7 @@ export default function Popup() {
   return (
     <div className="popup">
       <h2>options</h2>
-      <Option title="Enabled" optionName="enabled"/>
+      <Option title="Open Rich Diff Automatically" optionName="enabled"/>
     </div>
   );
   

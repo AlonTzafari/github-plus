@@ -1,7 +1,7 @@
 ( () => {
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-        chrome.storage.sync.get(['enabled'], ({enabled}) => {
-            if (message.command === 'openDiff' && enabled) {
+        chrome.storage.sync.get(['autoRichDiff'], ({autoRichDiff}) => {
+            if (message.command === 'openDiff' && autoRichDiff) {
                 const observer = new MutationObserver((mutations, observer) => {
                     const nBtns = document.querySelectorAll('button[aria-label="Display the rich diff"]').length;
                     if (nBtns > 0) {
