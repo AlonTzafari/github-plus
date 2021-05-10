@@ -17,22 +17,6 @@
             }
         })
     })
-      
-    // chrome.storage.sync.get(['enabled'], ({enabled}) => {
-    //     if (enabled) {
-    //         const observer = new MutationObserver((mutations, observer) => {
-    //             // openRichDiffView();
-    //             console.log(window.location);
-                
-    //             setTimeout(() => {
-    //                 observer.disconnect();
-    //             }, 2000);
-                
-    //         })
-    //         observer.observe(document.body, {childList: true, subtree: true });
-
-    //     }
-    // });
 
     function openRichDiffView() : void {
         
