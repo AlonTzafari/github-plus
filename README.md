@@ -1,4 +1,4 @@
-# Github Web Extra features
+# Github Plus
 > A chrome extension aimed to give developers more tools when reviewing pull requests. 
 
 > Built using TypeScript and React chrome extension [boilerplate](https://github.com/jhen0409/react-chrome-extension-boilerplate).
