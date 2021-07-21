@@ -1,9 +1,11 @@
 # Github Plus
 > A chrome extension aimed to give developers more tools when reviewing pull requests. 
 
+Available on [Chrome Web Store](https://chrome.google.com/webstore/detail/github-plus/jlglenfjjclpfgoifbmokomhahkeppih).
+
 > Built using TypeScript and React chrome extension [boilerplate](https://github.com/jhen0409/react-chrome-extension-boilerplate).
 
-## Installation
+## Local Installation
 1. Clone this repo
 2. npm i
 3. npm run dev
